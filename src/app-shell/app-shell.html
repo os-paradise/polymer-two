@@ -1,0 +1,34 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../guest-list.html">
+
+<dom-module id="app-shell">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+    <guest-list></guest-list>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class AppShell extends Polymer.Element {
+      static get is() { return 'app-shell'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'app-shell'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(AppShell.is, AppShell);
+  </script>
+</dom-module>

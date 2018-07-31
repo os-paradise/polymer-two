@@ -1,0 +1,101 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+
+<dom-module id="guest-list">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+
+            :host(:hover) {
+                color: green;
+            }
+
+            paper-card:hover {
+                transform: translate(0, 5px);
+            }
+        </style>
+        <form action="">
+            <input type="text" name="guestName" id="guestNameInput">
+            <button on-click="addGuest" type="button">Add guest</button>
+        </form>
+        <h1>soy la lista de invitados</h1>
+        <template is="dom-repeat" items="[[guestList]]" as="guest">
+            <paper-card on-click="handleClick" heading="[[guest.name]]">
+                <p>[[guest.lastName]]</p>
+            </paper-card>
+
+        </template>
+
+
+
+    </template>
+
+    <script>
+        /**
+         * `guest-list` Description
+         *
+         * @summary ShortDescription.
+         * @customElement
+         * @polymer
+         * @extends {Polymer.Element}
+         */
+        class GuestList extends Polymer.Element {
+            /**
+             * String providing the tag name to register the element under.
+             */
+            static get is() {
+                return 'guest-list';
+            }
+
+            /**
+             * Object describing property-related metadata used by Polymer features
+             */
+            static get properties() {
+                return {
+                    guestList: {
+                        type: Array
+                    }
+
+                };
+            }
+
+            /**
+             * Instance of the element is created/upgraded. Use: initializing state,
+             * set up event listeners, create shadow dom.
+             * @constructor
+             */
+            constructor() {
+                super();
+                this.guestList = [
+                    { name: "Monica", lastName: "Martinez" },
+                    { name: "Raul", lastName: "Sanchez" },
+                    { name: "Pedrito", lastName: "Fernandez" }
+                ];
+            }
+
+            /**
+             * Use for one-time configuration of your component after local DOM is initialized. 
+             */
+            ready() {
+                super.ready();
+
+                Polymer.RenderStatus.afterNextRender(this, function () {
+
+                });
+            }
+
+            handleClick(e) {
+               this.removeUser(e.target.heading)
+            }
+
+            removeUser(user) {
+                this.guestList = this.guestList.filter(guest => guest.name !== user )
+            }
+
+        }
+
+        window.customElements.define(GuestList.is, GuestList);
+    </script>
+</dom-module>
